@@ -1,47 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Dream of Clean Water</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
+  <header>
+    <div style="display: flex; align-items: center; justify-content: flex-start; gap: 20px; padding-left: 40px;">
+      <img src="https://d35lvrk9fb4ftj.cloudfront.net/eyJidWNrZXQiOiJkcm9wbWFyayIsImtleSI6IjUyMDQzLzk1ZWY4NGQxMTgzNTA5NGMxYTUyMGY4OGQzN2M1MGJkYjMwNGI3ZWU3OTdhOGJlNTUzNWUxNjE0Yzg5ZTNiOTAvcHJldmlldy9NYWRhZ2FzY2FyXzIwMTlfQ0ctNDI0Ni5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjYwMCwiaGVpZ2h0Ijo2MDAsImZpdCI6Imluc2lkZSIsIndpdGhvdXRFbmxhcmdlbWVudCI6dHJ1ZX19fQ==" alt="Logo Circle" style="width: 240px; height: 240px; border-radius: 50%; object-fit: cover; z-index: 1001; position: relative;" />
+    <div style="font-weight: bold; text-align: center; margin-top: -40px; margin-left: 40px;">
+      <h1 style="margin: 0; font-size: 3em; text-align: center; color: #003366;">The Dream of Clean Water:</h1>
+      <div style="margin-top: 0; font-size: 3em; text-align: center; color: #003366;">Made Real</div>
+    </div>
+  </header>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <div class="main-content" style="display: flex; align-items: flex-end; justify-content: space-between; padding: 40px; height: 60vh; box-sizing: border-box;">
+  <div style="flex: 1; max-width: 220px; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 540px;">
+    <p style="font-size: 1.6em; line-height: 1.6; color: #003366; text-align: center; font-family: 'Proxima Nova', sans-serif;">
+      100% of your donation will directly provide clean drinking water,
+      empowering communities with health, education, and opportunity.
+    </p>
+    <button style="background-color: #FFC907; color: #003366; border: 2px solid #003366; border-radius: 12px; padding: 10px 20px; font-family: 'Proxima Nova', sans-serif; font-weight: bold; font-size: 1.2em; cursor: pointer;" onclick="launchConfetti()">Give the Gift of Clean Water</button>
+  </div>
+  <div style="flex: 1; display: flex; justify-content: flex-end; align-items: flex-start; margin-top: -40px;">
+    <img src="https://mlyrymjj8hwz.i.optimole.com/cb:4e6q~50238/w:auto/h:auto/q:mauto/f:best/ig:avif/https://goodness-exchange.com/wp-content/uploads/2021/09/uganda6-e1569333222614.jpg" alt="Community scene in Uganda" style="width: 100%; height: auto; object-fit: cover; border-radius: 10px; margin: 0;" />
+  </div>
+</div>
+    
+    </div>
+  </div>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
+  
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+  <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+
+  <script>
+    function launchConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#003366'];
+
+  const button = document.querySelector('button');
+  const rect = button.getBoundingClientRect();
+  const originX = rect.left + rect.width / 2;
+  const originY = rect.top + rect.height / 2;
+
+  const confetti = Array.from({ length: 100 }, () => {
+    const angle = Math.random() * 2 * Math.PI;
+    const speed = Math.random() * 6 + 2;
+    return {
+      x: originX,
+      y: originY,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      r: Math.random() * 6 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      life: 100
+    };
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confetti.forEach(c => {
+      ctx.beginPath();
+    ctx.moveTo(c.x, c.y);
+    ctx.quadraticCurveTo(c.x - 2, c.y - 8, c.x, c.y - 12);
+    ctx.quadraticCurveTo(c.x + 2, c.y - 8, c.x, c.y);
+    ctx.fillStyle = c.color;
+    ctx.fill();
+    });
+    update();
+    if (confetti.some(c => c.life > 0)) {
+      requestAnimationFrame(draw);
+    }
+  }
+
+  function update() {
+    confetti.forEach(c => {
+      c.x += c.vx;
+      c.y += c.vy;
+      c.vy += 0.2; // gravity
+      c.life--;
+    });
+  }
+
+  draw();
+}
+  </script>
+  <img src="https://seeklogo.com/images/C/charity-water-logo-9121D887A9-seeklogo.com.png" alt="Charity: Water Jerry Can Logo" style="position: fixed; bottom: 100px; right: 40px; width: 120px; height: auto; z-index: 999;" />
 </body>
 </html>
